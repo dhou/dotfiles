@@ -1,0 +1,34 @@
+[user]
+	name = Damien Hou
+	email = dhou@slide.com
+[color]
+    ui = auto
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+    br = branch
+	pushme = "!f() { branch=$(git symbolic-ref HEAD | sed \"s/refs\\/heads\\///g\"); git push origin $branch; }; f"
+	edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
+	add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+	track-branch = "!f() { git checkout --track -b $1 origin/$1 ; git pull; }; f"
+	pwb = "!f() { git symbolic-ref HEAD | sed 's/refs\\/heads\\///g' ; }; f"
+	unique = "!f() { branch=$(git pwb); git log master..$branch $@; }; f"
+	dunique = "!f() { branch=$(git pwb); git diff master..$branch $@; }; f"
+	mergelog = "!f() { git log $1^2 --not $1^1; }; f"
+	remote-mkbranch = "!f() { git push origin HEAD:$1; git fetch origin; git checkout --track -b $1 origin/$1; git pull; }; f"
+[core]
+	editor = vim
