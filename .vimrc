@@ -1,6 +1,16 @@
 set nocompatible
 
+" Pathogen
+call pathogen#infect()
+call pathogen#runtime_append_all_bundles() 
+call pathogen#helptags()
+
+filetype on            " enables filetype detection
+filetype plugin on     " enables filetype specific plugins
+filetype plugin indent on
+
 set history=1000
+set undolevels=1000
 syn on
 set ts=4
 set backspace=2
@@ -10,15 +20,13 @@ set backspace=2
 set shiftwidth=4
 "set expandtab
 set autoindent
+set copyindent
 " Automatically indent when adding a curly bracket, etc. 
 set smartindent
 " Minimal number of screen lines to keep above and below the cursor. 
 set scrolloff=999 
 " Use UTF-8. 
 set encoding=utf-8
-
-filetype on            " enables filetype detection
-filetype plugin on     " enables filetype specific plugins
 
 " Set color scheme that I like. 
 if has("gui_running") 
@@ -35,7 +43,11 @@ noremap k gk
 set ignorecase
 set smartcase
 set incsearch
+
+" hide buffers instead of closing them
 set hidden
+
+set pastetoggle=<F2>
 
 " we don't want to edit these type of files
 set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
@@ -66,6 +78,9 @@ vnoremap <M-s> <Esc>/\%V
 
 " Q formats paragraphs, instead of entering ex mode
 noremap Q gq
+
+" Clears search highlight
+nnoremap <CR> :noh<CR><CR>
 
 "extended % matching
 runtime macros/matchit.vim
@@ -104,11 +119,13 @@ set wildmode=list:longest
 "let g:miniBufExplMapWindowNavArrows = 1
 "let g:miniBufExplMapCTabSwitchBufs = 1
 "let g:miniBufExplModSelTarget = 1
-let Tlist_Ctags_Cmd='/nail/home/dhou/dev/bin/ctags'
+let Tlist_Ctags_Cmd='$HOME/dev/bin/ctags'
 map T :TaskList<CR>
 map P :TlistToggle<CR>
 
 "autocmd FileType python set omnifunc=pythoncomplete#Complete
+au FileType cheetah set ft=html " For SnipMate
+au FileType js set ft=javascript 
 
 "-fuzzyFinder-
 nmap ;b :FuzzyFinderBuffer<CR>
@@ -169,12 +186,6 @@ nmap <leader>p :Gpull<CR>
 nmap <leader>ps :Gpush<CR>
 nmap <leader>l :Glog<CR>
 
-"compile ranch
-nmap <leader>c :make -C /nail/pg/dhou/main/flashAS3/ranch/<CR>
-"make templates
-nmap <leader>t :make -C /nail/pg/dhou/bt/templates/<CR>
-"config
-nmap <leader>g :sh /nail/pg/dhou/bt/configure config<CR>
 
 if &t_Co == 256
 	colorscheme xoria256
@@ -198,3 +209,12 @@ let tlist_actionscript_settings = 'actionscript;c:class;f:method;p:property;v:va
 " searching
 map gr :grep <cword> *<CR>
 map gR :grep \b<cword>\b *<CR>
+
+" ie js trailing comma check
+nmap ,ie /,\n*\s*}<CR>
+
+" jslint
+set makeprg=cat\ %\ \\\|\ /my/path/to/js\ /my/path/to/mylintrun.js\ %
+set errorformat=%f:%l:%c:%m
+
+
