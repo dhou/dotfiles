@@ -1,6 +1,6 @@
 [user]
 	name = Damien Hou
-	email = dhou@slide.com
+	email = dhou@google.com
 [color]
     ui = auto
 [color "branch"]
@@ -30,5 +30,12 @@
 	dunique = "!f() { branch=$(git pwb); git diff master..$branch $@; }; f"
 	mergelog = "!f() { git log $1^2 --not $1^1; }; f"
 	remote-mkbranch = "!f() { git push origin HEAD:$1; git fetch origin; git checkout --track -b $1 origin/$1; git pull; }; f"
+	time-travel = "!f() { rev=$(git rev-list -n 1 --before=\"$2\" $1); git checkout $rev; }; f"
 [core]
 	editor = vim
+[achievement]
+	upload = true
+[diff]
+	renames = copies
+[merge]
+	stat = true
