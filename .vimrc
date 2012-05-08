@@ -8,6 +8,7 @@ call pathogen#helptags()
 filetype on            " enables filetype detection
 filetype plugin on     " enables filetype specific plugins
 filetype plugin indent on
+syntax enable
 
 set history=1000
 set undolevels=1000
@@ -29,11 +30,14 @@ set scrolloff=999
 set encoding=utf-8
 
 " Set color scheme that I like. 
+set t_Co=256
 if has("gui_running") 
     set transparency=10
+	"set background=light
     colorscheme desert 
 else 
-    colorscheme darkblue 
+	"set background=dark
+    colorscheme devbox-dark-256
 endif
 
 """" Movement
@@ -94,6 +98,11 @@ set statusline+=%f\                          " filename
 set statusline+=%h%m%r%w                     " status flags 
 set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type 
 set statusline+=%{fugitive#statusline()}	 " vim-fugitive info
+
+set statusline+=%#warningmsg#				 " syntastic
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
 set statusline+=%=                           " right align remainder 
 set statusline+=0x%-8B                       " character value 
 set statusline+=%-14(%l,%c%V%)               " line, character 
@@ -119,6 +128,31 @@ set wildmode=list:longest
 "let g:miniBufExplMapWindowNavArrows = 1
 "let g:miniBufExplMapCTabSwitchBufs = 1
 "let g:miniBufExplModSelTarget = 1
+"
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+
 let Tlist_Ctags_Cmd='$HOME/dev/bin/ctags'
 map T :TaskList<CR>
 map P :TlistToggle<CR>
@@ -128,15 +162,11 @@ au FileType cheetah set ft=html " For SnipMate
 au FileType js set ft=javascript 
 
 "-fuzzyFinder-
-nmap ;b :FuzzyFinderBuffer<CR>
-nmap ;d :FuzzyFinderFile<CR>
-nmap ;f :FuzzyFinderMruFile<CR>
-nmap ;g :FuzzyFinderBookmark<CR>
-nmap ;t :FuzzyFinderTag<CR>
-nmap ;m :FuzzyFinderAddBookmark<CR><CR>
-"nmap ;c :FuzzyFinderWithCurrentDirWithCurrentBufferDir<CR>
+"nmap ;b :FufBuffer<CR>
+"nmap ;d :FufFile<CR>
+"nmap ;f :FufMruFile<CR>
+"nmap ;t :FufTag<CR>
 "nmap ;j :FufJumpList<CR>
-nmap <leader>d :FuzzyFinderFileWithCurrentBufferDir<CR>
 
 "-nerdtree-
 nmap ,n :NERDTree<CR>
@@ -187,9 +217,6 @@ nmap <leader>ps :Gpush<CR>
 nmap <leader>l :Glog<CR>
 
 
-if &t_Co == 256
-	colorscheme xoria256
-endif
 
 "save and load session
 autocmd VimEnter * call LoadSession() 
@@ -217,4 +244,19 @@ nmap ,ie /,\n*\s*}<CR>
 set makeprg=cat\ %\ \\\|\ /my/path/to/js\ /my/path/to/mylintrun.js\ %
 set errorformat=%f:%l:%c:%m
 
+"syntastic
 
+let g:syntastic_mode_map = { 'mode': 'passive',
+						   \ 'active_filetypes': ['ruby'],
+						   \ 'passive_filetypes': ['python'] }
+nmap <Leader>S :SyntasticCheck<CR>
+let g:syntastic_python_checker='pyflakes'
+
+" ctrlp
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn|*/m/*$',
+  \ 'file': '\.pyc$\|\.so$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
+nmap ;z :CtrlPMixed<CR>
