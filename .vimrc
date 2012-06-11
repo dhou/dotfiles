@@ -16,7 +16,7 @@ syn on
 set ts=4
 set backspace=2
 "set smarttab
-"set textwidth=79
+set textwidth=80
 "set softtabstop=4
 set shiftwidth=4
 "set expandtab
@@ -250,7 +250,8 @@ let g:syntastic_mode_map = { 'mode': 'passive',
 						   \ 'active_filetypes': ['ruby'],
 						   \ 'passive_filetypes': ['python'] }
 nmap <Leader>S :SyntasticCheck<CR>
-let g:syntastic_python_checker='pyflakes'
+let g:syntastic_python_checker='pylint'
+let g:syntastic_javascript_checker='jshint'
 
 " ctrlp
 let g:ctrlp_custom_ignore = {
