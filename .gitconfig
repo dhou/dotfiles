@@ -33,9 +33,18 @@
 	time-travel = "!f() { rev=$(git rev-list -n 1 --before=\"$2\" $1); git checkout $rev; }; f"
 [core]
 	editor = vim
+	whitespace = trailing-space,space-before-tab
 [achievement]
 	upload = true
 [diff]
 	renames = copies
+	tool = vimdiff
 [merge]
 	stat = true
+	conflictstyle = diff3
+[push]
+	default = tracking
+[rerere]
+	enabled = true
+[branch]
+	autosetupmerge = true
