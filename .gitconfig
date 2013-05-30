@@ -1,6 +1,6 @@
 [user]
 	name = Damien Hou
-	email = dhou@google.com
+	email = i@damienh.org
 [color]
     ui = auto
 [color "branch"]
@@ -40,8 +40,10 @@
 	renames = copies
 	tool = vimdiff
 [merge]
+	tool = vimdiff
 	stat = true
-	conflictstyle = diff3
+	renamelimit = 27950
+	#conflictstyle = diff3
 [push]
 	default = tracking
 [rerere]
