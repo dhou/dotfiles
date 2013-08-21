@@ -1,9 +1,54 @@
 set nocompatible
+filetype off
 
 " Pathogen
-call pathogen#infect()
-call pathogen#runtime_append_all_bundles() 
-call pathogen#helptags()
+" call pathogen#infect()
+" call pathogen#runtime_append_all_bundles() 
+" call pathogen#helptags()
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+" My Bundles here:
+"
+" original repos on github
+Bundle 'tpope/vim-fugitive'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Bundle 'scrooloose/nerdtree'
+Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/syntastic'
+Bundle 'garbas/vim-snipmate'
+Bundle 'tpope/vim-surround'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'Raimondi/delimitMate'
+
+" Bundle 'tpope/vim-rails.git'
+" vim-scripts repos
+Bundle 'L9'
+Bundle 'vim-addon-mw-utils'
+" Bundle 'FuzzyFinder'
+" non github repos
+" Bundle 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (ie. when working on your own plugin)
+" Bundle 'file:///Users/gmarik/path/to/plugin'
+" ...
+
+filetype plugin indent on     " required!
+"
+" Brief help
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install(update) bundles
+" :BundleSearch(!) foo - search(or refresh cache first) for foo
+" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
+
 
 filetype on            " enables filetype detection
 filetype plugin on     " enables filetype specific plugins
@@ -13,13 +58,14 @@ syntax enable
 set history=1000
 set undolevels=1000
 syn on
-set ts=4
-set backspace=2
+"set ts=4
+"set backspace=2
 "set smarttab
-set textwidth=80
+set textwidth=100
 "set softtabstop=4
+set expandtab
 set shiftwidth=4
-"set expandtab
+set tabstop=4
 set autoindent
 set copyindent
 " Automatically indent when adding a curly bracket, etc. 
@@ -37,7 +83,7 @@ if has("gui_running")
     colorscheme desert 
 else 
 	"set background=dark
-    colorscheme devbox-dark-256
+    "colorscheme devbox-dark-256
 endif
 
 """" Movement
@@ -86,8 +132,6 @@ noremap Q gq
 " Clears search highlight
 nnoremap <CR> :noh<CR><CR>
 
-"extended % matching
-runtime macros/matchit.vim
 set scrolloff=3
 
 " Status line 
@@ -130,20 +174,20 @@ set wildmode=list:longest
 "let g:miniBufExplModSelTarget = 1
 "
 " Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
+" let g:neocomplcache_enable_at_startup = 1
 " Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
+" let g:neocomplcache_enable_smart_case = 1
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
-inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+" inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
+" inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+" inoremap <expr><C-y>  neocomplcache#close_popup()
+" inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -216,7 +260,9 @@ nmap <leader>p :Gpull<CR>
 nmap <leader>ps :Gpush<CR>
 nmap <leader>l :Glog<CR>
 
+nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
+"autocmd BufEnter * silent! lcd %:p:h
 
 "save and load session
 autocmd VimEnter * call LoadSession() 
@@ -231,7 +277,7 @@ function! LoadSession()
 endfunction
 
 " actionscript for taglist
-let tlist_actionscript_settings = 'actionscript;c:class;f:method;p:property;v:variable'
+" let tlist_actionscript_settings = 'actionscript;c:class;f:method;p:property;v:variable'
 
 " searching
 map gr :grep <cword> *<CR>
