@@ -1,36 +1,34 @@
 set nocompatible
 filetype off
 
-" Pathogen
-" call pathogen#infect()
-" call pathogen#runtime_append_all_bundles() 
-" call pathogen#helptags()
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" let Vundle manage Vundle
-" required! 
-Bundle 'gmarik/vundle'
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
 
 " My Bundles here:
 "
 " original repos on github
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/syntastic'
-Bundle 'garbas/vim-snipmate'
-Bundle 'tpope/vim-surround'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'Raimondi/delimitMate'
+Plugin 'tpope/vim-fugitive'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'garbas/vim-snipmate'
+Plugin 'tpope/vim-surround'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'Raimondi/delimitMate'
+Plugin 'tpope/vim-markdown'
 
 " Bundle 'tpope/vim-rails.git'
 " vim-scripts repos
-Bundle 'L9'
-Bundle 'vim-addon-mw-utils'
+Plugin 'L9'
+Plugin 'vim-addon-mw-utils'
 " Bundle 'FuzzyFinder'
 " non github repos
 " Bundle 'git://git.wincent.com/command-t.git'
@@ -38,7 +36,12 @@ Bundle 'vim-addon-mw-utils'
 " Bundle 'file:///Users/gmarik/path/to/plugin'
 " ...
 
-filetype plugin indent on     " required!
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+
 "
 " Brief help
 " :BundleList          - list configured bundles
@@ -50,9 +53,6 @@ filetype plugin indent on     " required!
 " NOTE: comments after Bundle command are not allowed..
 
 
-filetype on            " enables filetype detection
-filetype plugin on     " enables filetype specific plugins
-filetype plugin indent on
 syntax enable
 
 set history=1000
