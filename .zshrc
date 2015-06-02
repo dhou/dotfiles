@@ -108,11 +108,17 @@ export LC_ALL="en_US.UTF-8"
 
 # set environment vars
 if [[ -e $HOME/.paths ]]; then
-	source $HOME/.paths
+  source $HOME/.paths
 fi
 
 # some more ls aliases
 if [[ -e $HOME/.aliases ]]; then
-	# statements
-	source $HOME/.aliases
+  # statements
+  source $HOME/.aliases
 fi
+
+# google stuff
+if [[ -e $HOME/.google ]]; then
+  source $HOME/.google
+fi
+

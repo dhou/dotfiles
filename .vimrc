@@ -19,17 +19,21 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
-Plugin 'garbas/vim-snipmate'
+" Plugin 'MarcWeber/vim-addon-mw-utils'
+" Plugin 'tomtom/tlib_vim'
+" Plugin 'garbas/vim-snipmate'
+
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-surround'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-markdown'
-
-" Bundle 'tpope/vim-rails.git'
-" vim-scripts repos
+Plugin 'flazz/vim-colorschemes'
 Plugin 'L9'
-Plugin 'vim-addon-mw-utils'
-" Bundle 'FuzzyFinder'
+Plugin 'majutsushi/tagbar'
 " non github repos
 " Bundle 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (ie. when working on your own plugin)
@@ -38,7 +42,6 @@ Plugin 'vim-addon-mw-utils'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 
@@ -52,6 +55,32 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle command are not allowed..
 
+" At work, or not:
+if filereadable(expand('~/.google'))
+  " Google-only
+  source ~/.vimrc_google
+  source /usr/share/vim/google/google.vim
+  Glug codefmt-google auto_filetypes+=blazebuild,java
+  " Glug piper plugin[mappings]
+  Glug relatedfiles plugin[mappings]
+  Glug gtimporter
+  Glug youcompleteme-google
+  Glug corpweb
+
+  source /usr/share/vim/google/gtags.vim
+
+  nnoremap <C-]> :exe 'let searchtag= "' . expand('<cword>') . '"' \| :exe 'let @/= "' . searchtag . '"'<CR> \| :exe 'Gtlist ' . searchtag <CR>
+
+  " command Jade !/google/data/ro/teams/jade/jade %
+
+  " Google mappings
+  " noremap <unique> <leader>g :GtImporter<CR>
+  " noremap <unique> <leader>cs :CorpWebCs<Space>
+  " noremap <unique> <leader>cf :CorpWebCsFile<CR>
+else
+  " Non-Google only
+  Plugin 'Valloric/YouCompleteMe'
+endif
 
 syntax enable
 
@@ -64,27 +93,30 @@ syn on
 set textwidth=100
 "set softtabstop=4
 set expandtab
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+" set tabstop=2
 set autoindent
 set copyindent
-" Automatically indent when adding a curly bracket, etc. 
+" Automatically indent when adding a curly bracket, etc.
 set smartindent
-" Minimal number of screen lines to keep above and below the cursor. 
-set scrolloff=999 
-" Use UTF-8. 
+" Minimal number of screen lines to keep above and below the cursor.
+set scrolloff=999
+" Use UTF-8.
 set encoding=utf-8
 
-" Set color scheme that I like. 
+" Set color scheme that I like.
 set t_Co=256
-if has("gui_running") 
+if has("gui_running")
     set transparency=10
-	"set background=light
-    colorscheme desert 
-else 
-	"set background=dark
-    "colorscheme devbox-dark-256
+    set background=light
+    colorscheme desert
+else
+    set background=dark
+    colorscheme solarized
 endif
+
+hi Normal ctermbg=none
+" hi NonText ctermbg=none
 
 """" Movement
 " work more logically with wrapped lines
@@ -107,21 +139,21 @@ nnoremap <c-k> {
 nnoremap <c-j> }
 nnoremap <c-l> El
 nnoremap <c-h> Bh
- 
+
 " Shift + Arrows - Visually Select text
 nnoremap <s-k> Vk
 nnoremap <s-j> Vj
 nnoremap <s-l> vl
 nnoremap <s-h> vh
- 
+
 if &diff
 " easily handle diffing
-	vnoremap < :diffget<CR>
-	vnoremap > :diffput<CR>
+ vnoremap < :diffget<CR>
+ vnoremap > :diffput<CR>
 else
 " visual shifting (builtin-repeat)
-	vnoremap < <gv
-	vnoremap > >gv
+ vnoremap < <gv
+ vnoremap > >gv
 endif
 
 vnoremap <M-s> <Esc>/\%V
@@ -134,31 +166,31 @@ nnoremap <CR> :noh<CR><CR>
 
 set scrolloff=3
 
-" Status line 
-set laststatus=2 
-set statusline= 
-set statusline+=%-3.3n\                      " buffer number 
-set statusline+=%f\                          " filename 
-set statusline+=%h%m%r%w                     " status flags 
-set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type 
-set statusline+=%{fugitive#statusline()}	 " vim-fugitive info
+" Status line
+set laststatus=2
+set statusline=
+set statusline+=%-3.3n\                      " buffer number
+set statusline+=%f\                          " filename
+set statusline+=%h%m%r%w                     " status flags
+set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type
+set statusline+=%{fugitive#statusline()}  " vim-fugitive info
 
-set statusline+=%#warningmsg#				 " syntastic
+set statusline+=%#warningmsg#     " syntastic
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-set statusline+=%=                           " right align remainder 
-set statusline+=0x%-8B                       " character value 
-set statusline+=%-14(%l,%c%V%)               " line, character 
-set statusline+=%<%P                         " file position 
-" Show line number, cursor position. 
+set statusline+=%=                           " right align remainder
+set statusline+=0x%-8B                       " character value
+set statusline+=%-14(%l,%c%V%)               " line, character
+set statusline+=%<%P                         " file position
+" Show line number, cursor position.
 set number
-set ruler 
-" Display incomplete commands. 
-set showcmd 
-" Show editing mode 
-set showmode 
-" Error bells are displayed visually. 
+set ruler
+" Display incomplete commands.
+set showcmd
+" Show editing mode
+set showmode
+" Error bells are displayed visually.
 set visualbell
 set hlsearch
 set showmatch
@@ -168,27 +200,6 @@ highlight CursorLine guibg=lightblue ctermbg=lightgray
 set wildmenu
 set wildmode=list:longest
 
-"let g:miniBufExplMapWindowNavVim = 1
-"let g:miniBufExplMapWindowNavArrows = 1
-"let g:miniBufExplMapCTabSwitchBufs = 1
-"let g:miniBufExplModSelTarget = 1
-"
-" Use neocomplcache.
-" let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-" let g:neocomplcache_enable_smart_case = 1
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-" inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-" <TAB>: completion.
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-" inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-" inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-" inoremap <expr><C-y>  neocomplcache#close_popup()
-" inoremap <expr><C-e>  neocomplcache#cancel_popup()
-
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -196,24 +207,9 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-
-let Tlist_Ctags_Cmd='$HOME/dev/bin/ctags'
-map T :TaskList<CR>
-map P :TlistToggle<CR>
-
 "autocmd FileType python set omnifunc=pythoncomplete#Complete
 au FileType cheetah set ft=html " For SnipMate
-au FileType js set ft=javascript 
-
-"-fuzzyFinder-
-"nmap ;b :FufBuffer<CR>
-"nmap ;d :FufFile<CR>
-"nmap ;f :FufMruFile<CR>
-"nmap ;t :FufTag<CR>
-"nmap ;j :FufJumpList<CR>
-
-"-nerdtree-
-nmap ,n :NERDTree<CR>
+au FileType js set ft=javascript
 
 ",v brings up my .vimrc
 ",V reloads it -- making all changes active (have to save first)
@@ -265,19 +261,16 @@ nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 "autocmd BufEnter * silent! lcd %:p:h
 
 "save and load session
-autocmd VimEnter * call LoadSession() 
-autocmd VimLeave * call SaveSession() 
-function! SaveSession() 
-	execute 'mksession! $HOME/.vim/sessions/session.vim' 
-endfunction 
-function! LoadSession() 
-	if argc() == 0 
-   		execute 'source $HOME/.vim/sessions/session.vim' 
-   	endif 
+autocmd VimEnter * call LoadSession()
+autocmd VimLeave * call SaveSession()
+function! SaveSession()
+ execute 'mksession! $HOME/.vim/sessions/session.vim'
 endfunction
-
-" actionscript for taglist
-" let tlist_actionscript_settings = 'actionscript;c:class;f:method;p:property;v:variable'
+function! LoadSession()
+ if argc() == 0
+     execute 'source $HOME/.vim/sessions/session.vim'
+    endif
+endfunction
 
 " searching
 map gr :grep <cword> *<CR>
@@ -290,11 +283,14 @@ nmap ,ie /,\n*\s*}<CR>
 set makeprg=cat\ %\ \\\|\ /my/path/to/js\ /my/path/to/mylintrun.js\ %
 set errorformat=%f:%l:%c:%m
 
-"syntastic
+"-nerdtree-
+nmap ,n :NERDTree<CR>
+nmap ,r :NERDTreeFind<CR>
 
+"syntastic
 let g:syntastic_mode_map = { 'mode': 'passive',
-						   \ 'active_filetypes': ['ruby'],
-						   \ 'passive_filetypes': ['python'] }
+         \ 'active_filetypes': ['ruby'],
+         \ 'passive_filetypes': ['python'] }
 nmap <Leader>S :SyntasticCheck<CR>
 let g:syntastic_python_checker='pylint'
 let g:syntastic_javascript_checker='jshint'
@@ -305,5 +301,27 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\.pyc$\|\.so$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
-
 nmap ;z :CtrlPMixed<CR>
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-o>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" gitgutter
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+
+" eclim
+nmap <leader>f :JavaSearchContext<CR>
+
+" Tagbar
+nmap <leader>t :TagbarToggle<CR>
+
+" cd to current file
+nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
+
+filetype plugin indent on    " required

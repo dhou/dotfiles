@@ -18,3 +18,6 @@ alias -g gcp="g cherry-pick"
 alias -g gsh="g show"
 alias -g grh="g reset --hard"
 alias -g gr="g reset"
+
+alias -g fcrun="./wireless/android/vending/frontend/amps-o-matic.sh --build --run --non_amps_team"
+alias -g fcsuperdev="./wireless/android/vending/frontend/amps-o-matic.sh --superdevmode"
