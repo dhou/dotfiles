@@ -98,6 +98,8 @@ setopt noglobdots           # * shouldn't match dotfiles. ever.
 
 setopt long_list_jobs       # List jobs in long format
 
+unsetopt cdablevars         # faster directory name autocomplete
+
 # Autocomplete for 'g' as well
 # complete -o default -o nospace -F _git g
 
