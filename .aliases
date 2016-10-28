@@ -1,0 +1,22 @@
+alias l="ls -lA"
+alias ll='ls -l'
+alias la='ls -a'
+alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
+alias dev='cd ~/dev'
+alias g="git"
+alias gc="g co"
+alias gb="g br"
+alias gs="g st"
+alias gd="g diff"
+alias gst="g stash"
+alias gi="g ci"
+alias gl="g log"
+alias gp="g pull"
+alias gps="g pushme"
+alias ga="g add"
+alias gcp="g cherry-pick"
+alias gsh="g show"
+alias grh="g reset --hard"
+alias gr="g reset"
+
+alias genprj="./googlemac/iPhone/YouTube/Tools/Bazel/GenerateMyProject.py --project YouTube"

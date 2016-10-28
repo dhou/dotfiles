@@ -1,0 +1,66 @@
+set nocompatible
+
+"""" Movement
+" work more logically with wrapped lines
+set ignorecase
+set smartcase
+set incsearch
+
+" Ctrl + Arrows - Move around quickly
+nnoremap <c-k> {
+nnoremap <c-j> }
+nnoremap <c-l> El
+nnoremap <c-h> Bh
+ 
+" Shift + Arrows - Visually Select text
+" nnoremap <s-k> Vk
+" nnoremap <s-j> Vj
+" nnoremap <s-l> vl
+" nnoremap <s-h> vh
+ 
+vnoremap <M-s> <Esc>/\%V
+
+
+" Clears search highlight
+nnoremap <CR> :noh<CR><CR>
+
+set scrolloff=3
+
+" Show line number, cursor position. 
+set number
+set ruler 
+" Display incomplete commands. 
+set showcmd 
+" Show editing mode 
+set showmode 
+" Error bells are displayed visually. 
+set visualbell
+set hlsearch
+set showmatch
+"highlight current line
+highlight CursorLine guibg=lightblue ctermbg=lightgray
+
+
+map <space> <c-f>
+map <backspace> <c-b>
+
+"moving between splits
+map ;h <c-w>h
+map ;l <c-w>l
+map ;j <c-w>j
+map ;k <c-w>k
+map ;[ <c-w>-
+map ;] <c-w>+
+map ;r <c-w>r
+map ;K <c-w>K
+map ;J <c-w>J
+map ;H <c-w>H
+map ;L <c-w>L
+map ;{ <c-w>_
+map ;} <c-w>|
+map ;= <c-w>=
+
+"splits
+map ,t :vert split<CR>
+map ,s :split<CR>
+
