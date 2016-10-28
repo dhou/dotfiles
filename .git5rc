@@ -1,0 +1,20 @@
+[sync]
+package-check = false
+
+[export]
+fast-export = true
+description-from-git = true
+
+[mail]
+fast-export = true
+description-from-git = true
+
+[submit]
+fast-export = true
+description-from-git = true
+
+[track]
+# p4port=perforce10:10666
+
+# [diff]
+# command = difftool
