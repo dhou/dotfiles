@@ -20,3 +20,6 @@ alias grh="g reset --hard"
 alias gr="g reset"
 
 alias genprj="./googlemac/iPhone/YouTube/Tools/Bazel/GenerateMyProject.py --project YouTube"
+alias gsync="git5 sync"
+alias trackyt="~/dev/git5-track-p4-depot-paths //depot/google3/googlemac/iPhone/YouTube/YouTube/p4_depot_paths //depot/google3/googlemac/iPhone/YouTube/p4_depot_paths"
+alias mendelbrot='/usr/bin/mendel --frontend=youtube'
