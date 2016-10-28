@@ -124,3 +124,13 @@ if [[ -e $HOME/.google ]]; then
   source $HOME/.google
 fi
 
+export NVM_DIR="/Users/dhou/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# mount the src file image
+function mountSrc { hdiutil attach ~/src.dmg.sparseimage -mountpoint ~/src; }
+
+
+# Bagpipe setup
+. $HOME/.bagpipe/setup.sh $HOME/.bagpipe dhou.mtv
+export PATH=$HOME/bin:$PATH

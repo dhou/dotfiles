@@ -1,0 +1,7 @@
+export PATH=/usr/local/bin:/Users/dhou/Dropbox/bin:/usr/local/mysql/bin:/usr/local/share/python:$HOME/dev/pulse/bin:$HOME/dev/git-achievements:$PATH
+export PYTHONPATH=.:/usr/local/google_appengine:/usr/local/google_appengine/lib:/usr/local/Cellar/python/2.7.1/lib/python2.7/site-packages:$PYTHONPATH
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"    
+export VIMRC=/Users/dhou/.vimrc
+export EDITOR=vim
+export P4CONFIG=.p4config

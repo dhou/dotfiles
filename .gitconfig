@@ -1,6 +1,6 @@
 [user]
 	name = Damien Hou
-	email = i@damienh.org
+	email = dhou@google.com
 [color]
     ui = auto
 [color "branch"]
@@ -20,7 +20,7 @@
 	co = checkout
 	ci = commit
 	st = status
-    br = branch
+        br = branch
 	pushme = "!f() { branch=$(git symbolic-ref HEAD | sed \"s/refs\\/heads\\///g\"); git push origin $branch; }; f"
 	edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
 	add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
@@ -50,3 +50,11 @@
 	enabled = true
 [branch]
 	autosetupmerge = true
+[filter "media"]
+	clean = git media clean %f
+	smudge = git media smudge %f
+	required = true
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
