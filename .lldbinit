@@ -38,3 +38,6 @@ command alias commands breakpoint command list
 
 # Threading
 command alias return thread return
+
+settings set -g target.inline-breakpoint-strategy always
+
