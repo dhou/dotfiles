@@ -1,4 +1,4 @@
-export PATH=/usr/local/bin:/usr/bin:$HOME/bin:/opt/local/bin:/usr/local/opt/ruby/bin:/usr/local/mysql/bin:$PATH
+export PATH=/usr/local/bin:/usr/bin:$HOME/bin:/opt/local/bin:/usr/local/opt/ruby/bin:/usr/local/mysql/bin:/usr/local/share/python:$PATH
 export PYTHONPATH=.:/usr/local/google_appengine:/usr/local/google_appengine/lib:/usr/local/Cellar/python/2.7.1/lib/python2.7/site-packages:$PYTHONPATH
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"    
