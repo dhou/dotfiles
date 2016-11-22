@@ -22,4 +22,6 @@ alias sshdesk='ssh dhou.mtv -t "tmux attach"'
 alias ducks="du -cks * | sort -rn"
 alias genprj="cd ~/src/dhou-youtube/google3/ && ./googlemac/iPhone/YouTube/Tools/Bazel/GenerateMyProject.py --project YouTube"
 alias gentest="cd ~/src/dhou-youtube/google3/ && ./googlemac/iPhone/YouTube/Tools/Bazel/GenerateMyProject.py --project YouTubeFunctionalTests --device_cpu=x86_64"
+alias gsync="git5 sync"
+alias trackyt="git5-track-p4-depot-paths //depot/google3/googlemac/iPhone/YouTube/p4_depot_paths //depot/google3/googlemac/iPhone/YouTube/YouTube/p4_depot_paths //depot/google3/tools/osx/p4_depot_paths"
 
