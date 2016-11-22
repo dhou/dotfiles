@@ -132,5 +132,5 @@ function mountSrc { hdiutil attach ~/src.dmg.sparseimage -mountpoint ~/src; }
 
 
 # Bagpipe setup
-. $HOME/.bagpipe/setup.sh $HOME/.bagpipe dhou.mtv
-export PATH=$HOME/bin:$PATH
+# . $HOME/.bagpipe/setup.sh $HOME/.bagpipe dhou.mtv
+# export PATH=$HOME/bin:$PATH
