@@ -18,8 +18,8 @@ alias gcp="g cherry-pick"
 alias gsh="g show"
 alias grh="g reset --hard"
 alias gr="g reset"
-alias sshdesk='ssh dhou.mtv -t "tmux attach"'
+alias sshdesk='ssh dhou.mtv -t "tmux attach -d"'
 alias ducks="du -cks * | sort -rn"
-alias genprj="cd ~/src/dhou-youtube/google3/ && ./googlemac/iPhone/YouTube/Tools/Bazel/GenerateMyProject.py --project YouTube"
+alias genprj="cd ~/src/dhou-youtube/google3/ && ./googlemac/iPhone/YouTube/Tools/Bazel/GenerateMyProject.py --disable_feature_vr --disable_drishti --project YouTube"
 alias gentest="cd ~/src/dhou-youtube/google3/ && ./googlemac/iPhone/YouTube/Tools/Bazel/GenerateMyProject.py --project YouTubeFunctionalTests --device_cpu=x86_64"
 

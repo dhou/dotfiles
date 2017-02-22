@@ -112,7 +112,7 @@ if has("gui_running")
     colorscheme desert
 else
     set background=dark
-    colorscheme solarized
+    colorscheme desert
 endif
 
 hi Normal ctermbg=none
