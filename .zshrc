@@ -113,10 +113,16 @@ if [[ -e $HOME/.paths ]]; then
   source $HOME/.paths
 fi
 
-# some more ls aliases
+# some more aliases
 if [[ -e $HOME/.aliases ]]; then
   # statements
   source $HOME/.aliases
+fi
+
+# Local only aliases
+if [[ -e $HOME/.aliases_local ]]; then
+  # statements
+  source $HOME/.aliases_local
 fi
 
 # google stuff
