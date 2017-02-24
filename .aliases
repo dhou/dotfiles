@@ -26,4 +26,4 @@ alias trackyt="git5-track-p4-depot-paths //depot/google3/googlemac/iPhone/YouTub
 alias genprj="cd ~/src/dhou-youtube/google3/ && ./googlemac/iPhone/YouTube/Tools/Bazel/GenerateMyProject.py --disable_drishti --disable_feature_vr --project YouTube"
 alias gentest="cd ~/src/dhou-youtube/google3/ && ./googlemac/iPhone/YouTube/Tools/Bazel/GenerateMyProject.py --disable_drishti --disable_feature_vr --device_cpu=x86_64 --project YouTubeFunctionalTests"
 alias genmobler="cd ~/src/dhou-youtube/google3/ && ./googlemac/iPhone/YouTube/Tools/Bazel/GenerateMyProject.py --disable_drishti --disable_feature_vr --enable_feature_elements --project YouTube"
-
+alias mendelbrot="/usr/bin/mendel --frontend=youtube"
